@@ -7,14 +7,12 @@ import javax.persistence.Persistence;
 
 
 public class SessionHelper {
-    static EntityManager entityManager = null;
+   private static EntityManager entityManager = null;
     
     public static EntityManager getEntityManager(){
         if(entityManager == null){
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("site_commerce_pu");
-            EntityManager entityManager = emf.createEntityManager();
-            return entityManager ;
-            
+            entityManager = emf.createEntityManager();           
         }
         return entityManager ;
     }
