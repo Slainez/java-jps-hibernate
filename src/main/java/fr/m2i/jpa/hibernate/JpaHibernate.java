@@ -1,15 +1,19 @@
 package fr.m2i.jpa.hibernate;
 
+
+import static fr.m2i.jpa.hibernate.helper.SessionHelper.getEntityManager;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 
 public class JpaHibernate {
 
     public static void main(String[] args) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("site_commerce_pu");
-        EntityManager entityManager = emf.createEntityManager();
-        System.out.println("Hello World!");
+        EntityManager em = getEntityManager() ;
+        if(em != null){
+             System.out.println("em est pas null");
+        }else{
+            System.out.println("em est null");
+        }
+        
     }
 }
