@@ -1,19 +1,12 @@
 package fr.m2i.jpa.hibernate.model;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 @Entity
 @Table(name="roles")
-public class Role {
-    
-    
+public class Role {    
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id_role",
@@ -29,13 +22,11 @@ public class Role {
     public Role() {
     }
 
-    public Role(long id, String description, String identifiant) {
-        this.id = id;
+    public Role( String description, String identifiant) {        
         this.description = description;
         this.identifiant = identifiant;
     }
     
-
     public long getId() {
         return id;
     }
@@ -60,6 +51,9 @@ public class Role {
         this.identifiant = identifiant;
     }
     
-    
+     @Override
+    public String toString() {
+        return "Role{" + "idRole=" + id + ", identifiant=" + identifiant + ", description=" + description + '}';
+    }
     
 }
