@@ -3,6 +3,7 @@ package fr.m2i.jpa.hibernate;
 
 import fr.m2i.jpa.hibernate.dao.RoleDAO;
 import fr.m2i.jpa.hibernate.model.Role;
+import java.util.List;
 
 public class JpaHibernate {
 
@@ -10,17 +11,26 @@ public class JpaHibernate {
         
         
         
-        Role premierRole = new Role("President Directeur General","PDG");
-        premierRole.setId(1L);
+        Role premierRole = new Role("Acheteur","CUSTOMER");
+        Role secondRole = new Role("Invité","GUEST");
         
         RoleDAO roleDao = new RoleDAO();
-       // roleDao.create(premierRole);
+        roleDao.create(premierRole);
+        roleDao.create(secondRole);
+        
+        
+        List<Role> listRole = roleDao.findAll();
+        
+        for( Role role : listRole){
+            
+            System.out.println(role);
+        }
+        
        
         
-        premierRole.setDescription("President directeur général");      
-       
-        
-        roleDao.update(premierRole);
+        //premierRole.setDescription("Administrateur") ;
+       // premierRole.setIdentifiant("ADMIN");       
+       // roleDao.update(premierRole);
         
     }
 }

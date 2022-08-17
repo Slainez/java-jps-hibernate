@@ -3,6 +3,7 @@ package fr.m2i.jpa.hibernate.dao;
 
 import static fr.m2i.jpa.hibernate.helper.SessionHelper.getEntityManager;
 import fr.m2i.jpa.hibernate.model.Role;
+import java.util.List;
 import javax.persistence.*;
 
 
@@ -36,31 +37,41 @@ public class RoleDAO {
         
     }
     
-    public void update( Role role){
-        
-        EntityTransaction transact = null ;
-         
+    public void update(Role role) {
+
+        EntityTransaction transact = null;
+
         Role roleToUpdate = findById(role.getId());
-        
-        if(!role.getDescription().equals(roleToUpdate.getDescription())){
+
+        if (!role.getDescription().equals(roleToUpdate.getDescription())) {
             roleToUpdate.setDescription(role.getDescription());
         }
-         if(!role.getIdentifiant().equals(roleToUpdate.getIdentifiant())){
+        if (!role.getIdentifiant().equals(roleToUpdate.getIdentifiant())) {
             roleToUpdate.setIdentifiant(role.getIdentifiant());
         }
-        
-        try{        
-                        
+
+        try {
+
             transact = em.getTransaction();
             transact.begin();
             em.merge(roleToUpdate);
             transact.commit();
-            
-        }catch(Exception e){
-              if(transact != null){
+
+        } catch (Exception e) {
+            if (transact != null) {
                 transact.rollback();
             }
         }
+
+    }
+    
+    public List<Role> findAll(){
+        
+        Query query =   em.createQuery("SELECT r FROM Role r");
+        
+        List<Role> results = query.getResultList();
+        
+        return results ;        
         
     }
     
