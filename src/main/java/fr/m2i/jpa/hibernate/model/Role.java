@@ -60,6 +60,22 @@ public class Role {
         this.identifiant = identifiant;
     }
     
+    @Override
+    public String toString() {
+        return "Role{" + "idRole=" + id + ", identifiant=" + identifiant + ", description=" + description + '}';
+    }   
+    
+    
+     public void copy(Role roleData) {
+
+        if (roleData.getIdentifiant() != null) {
+            this.setIdentifiant(roleData.getIdentifiant());
+        }
+
+        if (roleData.getDescription()!= null) {
+            this.setDescription(roleData.getDescription());
+        }
+    }
     
     
 }
