@@ -28,7 +28,10 @@ public class RoleDAO {
             transact.commit();
             
         }catch(Exception e){
-            transact.rollback();
+            if(transact != null){
+                transact.rollback();
+            }
+            
         }
         
     }
@@ -54,7 +57,9 @@ public class RoleDAO {
             transact.commit();
             
         }catch(Exception e){
-            transact.rollback();
+              if(transact != null){
+                transact.rollback();
+            }
         }
         
     }
