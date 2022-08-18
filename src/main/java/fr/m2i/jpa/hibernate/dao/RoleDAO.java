@@ -68,7 +68,7 @@ public class RoleDAO {
     // => set les données :
     // roleToUpdate.copy(roleData); -> set uniquement les données qui ne sont pas null
 
-    public void update(Long id, Role roleData) {
+    public void update(Long id, Role  roleData) {
 
         Role roleToUpdate = entityManager.find(Role.class, id);
 
