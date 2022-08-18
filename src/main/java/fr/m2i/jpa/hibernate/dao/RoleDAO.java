@@ -18,6 +18,13 @@ public class RoleDAO {
         
     }
     
+    public List<Role> findAll(){
+        
+        Query findAllQuery =   em.createQuery("SELECT r FROM Role r");       
+        return findAllQuery.getResultList();        
+        
+    }
+    
     public void create(Role role){
         EntityTransaction transact = null ;
         
@@ -65,14 +72,6 @@ public class RoleDAO {
 
     }
     
-    public List<Role> findAll(){
-        
-        Query query =   em.createQuery("SELECT r FROM Role r");
-        
-        List<Role> results = query.getResultList();
-        
-        return results ;        
-        
-    }
+    
     
 }
