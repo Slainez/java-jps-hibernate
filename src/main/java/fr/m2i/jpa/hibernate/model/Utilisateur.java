@@ -2,6 +2,7 @@
 package fr.m2i.jpa.hibernate.model;
 
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 
 
@@ -55,7 +56,12 @@ public class Utilisateur {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="id_role")
     private Role role ;
+    
+    
+    @OneToMany(mappedBy = "utilisateur" , cascade = CascadeType.ALL)
+    private List<Adresse> adresses ;
 
+   
     public Utilisateur() {
     }
 
@@ -171,6 +177,15 @@ public class Utilisateur {
     public void setRole(Role role) {
         this.role = role;
     }
+    
+     public List<Adresse> getAdresses() {
+        return adresses;
+    }
+
+    public void setAdresses(List<Adresse> adresses) {
+        this.adresses = adresses;
+    }
+
     
     public void copy(Utilisateur userData){
         
