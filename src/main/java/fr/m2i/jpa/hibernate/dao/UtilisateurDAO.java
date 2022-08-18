@@ -80,12 +80,12 @@ public class UtilisateurDAO {
             try {
                 transact = em.getTransaction();
                 transact.begin();
-                em.merge(userToDelete);
+                em.remove(userToDelete);
                 transact.commit();
 
             } catch (Exception e) {
                 if (transact != null) {
-                    System.out.println("Une erreur s'est produite durant la modification!");
+                    System.out.println("Une erreur s'est produite durant la suppression!");
                     transact.rollback();
                 }
 
