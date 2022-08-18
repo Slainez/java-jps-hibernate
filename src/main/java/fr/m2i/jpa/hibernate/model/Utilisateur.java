@@ -1,12 +1,15 @@
 
 package fr.m2i.jpa.hibernate.model;
+
+
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "utilisateurs")
 public class Utilisateur {
-    
+
     @Id
     @Column(name = "id_utilisateur")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,6 +18,9 @@ public class Utilisateur {
     @JoinColumn(name = "id_role", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private Role role;
+
+    @OneToMany(mappedBy = "utilisateur", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Adresse> adresses;
 
     @Column(name = "civilite", length = 100)
     private String civilite;
@@ -83,6 +89,14 @@ public class Utilisateur {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public List<Adresse> getAdresses() {
+        return adresses;
+    }
+
+    public void setAdresses(List<Adresse> adresses) {
+        this.adresses = adresses;
     }
 
     public String getCivilite() {
@@ -180,9 +194,16 @@ public class Utilisateur {
                 + ", dateModification=" + dateModification
                 + ", dateNaissance=" + dateNaissance + '}';
     }
-    
-    
-     public void copy(Utilisateur userData) {
+
+    public void addAddress(Adresse address) {
+        
+    }
+
+    public void removeAddress(Adresse address) {
+        
+    }
+
+    public void copy(Utilisateur userData) {
 
         if (userData == null) {
             return;
@@ -228,10 +249,4 @@ public class Utilisateur {
             this.setDateNaissance(userData.getDateNaissance());
         }
     }
- 
-    
 }
-
-
-    
-
