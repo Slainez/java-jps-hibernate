@@ -2,9 +2,11 @@ package fr.m2i.jpa.hibernate;
 
 
 import fr.m2i.jpa.hibernate.dao.AdresseDAO;
+import fr.m2i.jpa.hibernate.dao.ProduitDAO;
 import fr.m2i.jpa.hibernate.dao.RoleDAO;
 import fr.m2i.jpa.hibernate.dao.UtilisateurDAO;
 import fr.m2i.jpa.hibernate.model.Adresse;
+import fr.m2i.jpa.hibernate.model.Produit;
 import fr.m2i.jpa.hibernate.model.Role;
 import fr.m2i.jpa.hibernate.model.Utilisateur;
 import java.text.SimpleDateFormat;
@@ -139,13 +141,90 @@ public class JpaHibernate {
 //  adressDao.delete(3L);
 //  adressDao.delete(4L);
 
+
+/////*******************PRODUIT********************************
+
+//  //Instanciation du DAO
+  ProduitDAO produitDao = new ProduitDAO();
+//  
+//  // Creation
+//  Produit produit = new Produit(true,"une petite pomme","Pomme",2.5F,"AZEPOM",10);
+//  Produit produitToUpdate = new Produit(true,"Poire de saison","Poire",2.5F,"AZEPOI",10);
+//  
+//  // Create
+//  
+//  produitDao.create(produit);
+//  
+//  
+//  // Update
+//   
+//   produitToUpdate.setId(1L);
+//   
+//   produitDao.update(produitToUpdate);
+//   
+//   
+//   // Find ALL
+//   
+//   produitDao.create(produit);   
+//   List<Produit> inventaire = produitDao.findAll();
+//   
+//   for(Produit p : inventaire){
+//       System.out.println(p);
+//   }
+//   
+//   // Find by id 
+//  
+//  Produit founded = produitDao.findById(1L);
+//  System.out.println(founded);
   
-  
-  
-  
+String name = "eget, dictum placerat, augue. Sed molestie. Sed id risus quis";
+String description = "Poire de saison" ;
+String reference = "bibendum";
+
+
+List<Produit> resultList = produitDao.findByNom(name);
+
+displayResult(resultList);
+
+resultList = produitDao.findByDescription(description);
+
+displayResult(resultList);
+
+
+resultList = produitDao.findByPrix(36.00);
+
+displayResult(resultList);
+
+
+resultList = produitDao.findByReference(reference);
+displayResult(resultList);
 
 
 
-       
+Produit founded = produitDao.findByMostQuantity();
+
+System.out.println(founded);
+
+   
+
+
     }
+    
+    public static void displayResult(List<Produit> list){
+        for(Produit p : list){
+            System.out.println("**************");
+            System.out.println("Id Produit : " + p.getId());
+            System.out.println("Nom Produit : " + p.getNom());
+            System.out.println("Prix Produit : " + p.getPrix());
+            System.out.println("Quantite Produit : " + p.getStock());
+            System.out.println("Rference Produit : " + p.getReference());            
+            System.out.println("Description Produit : " + p.getDescription());
+            System.out.println("**************");
+            
+           
+      }
+        
+        
+    }  
+    
 }

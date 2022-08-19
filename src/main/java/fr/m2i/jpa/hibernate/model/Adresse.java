@@ -30,6 +30,7 @@ public class Adresse {
     @Column(name="ville", length=100)
     private String ville ;
     
+    @JoinColumn(name="id_utilisateur",nullable=true)
     @ManyToOne(fetch = FetchType.LAZY)
     private Utilisateur utilisateur ;
 

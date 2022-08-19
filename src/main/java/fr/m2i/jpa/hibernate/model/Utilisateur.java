@@ -1,6 +1,7 @@
 
 package fr.m2i.jpa.hibernate.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
@@ -58,7 +59,7 @@ public class Utilisateur {
     private Role role ;
     
     
-    @OneToMany(mappedBy = "utilisateur" , cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "utilisateur" , cascade = CascadeType.ALL , orphanRemoval = true)
     private List<Adresse> adresses ;
 
    
@@ -227,5 +228,21 @@ public class Utilisateur {
         
     }
     
+  public void addAddress(Adresse address) {
+        if (adresses == null) {
+            adresses = new ArrayList<>();
+        }
+
+        adresses.add(address);
+        address.setUtilisateur(this);
+    }
+
+    public void removeAddress(Adresse address) {
+        address.setUtilisateur(null);
+
+        if (adresses != null) {
+            adresses.remove(address);
+        }
+    }
     
 }
